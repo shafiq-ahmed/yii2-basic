@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\QueryForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -128,7 +129,7 @@ class SiteController extends Controller
 
     public function actionQuery()
     {
-        $model= new ContactForm();
+        $model= new QueryForm();
     return $this->render('query',[
         'model'=>$model,
     ]);
