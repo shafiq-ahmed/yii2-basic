@@ -130,8 +130,15 @@ class SiteController extends Controller
     public function actionQuery()
     {
         $model= new QueryForm();
-    return $this->render('query',[
-        'model'=>$model,
-    ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+
+            return $this->refresh();
+        }
+        return $this->render('query',[
+            'model'=>$model,
+        ]);
     }
+
+
 }
