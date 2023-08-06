@@ -14,7 +14,7 @@ class QueryForm extends ActiveRecord
          // email has to be a valid email address
          ['email', 'email'],
          // verifyCode needs to be entered correctly
-         ['verifyCode', 'captcha'],
+         ['phone_number','match', 'pattern'=>'/^\d{13}$/'],
      ];
  }
 }
