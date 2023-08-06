@@ -17,7 +17,7 @@ class QueryForm extends ActiveRecord
          // email has to be a valid email address
          ['email', 'email'],
          //subject can be empty or max 80 in length. subject will take a string input. Max length is taken from database
-         ['subject','string','length'=>[80]],
+         ['subject','string','length'=>[0,80]],
          // verifyCode needs to be entered correctly
          //ToDo
          //Phone numbers either 11 or 13 digits of length have to be accepted
