@@ -1,6 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var yii\grid\GridView $gridview */
 
 $this->title = 'Queries';
 ?>
@@ -15,19 +16,11 @@ $this->title = 'Queries';
     </div>
 
     <div class="body-content">
-<?php
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
 
-$dataProvider = new ActiveDataProvider([
-    'query' => \app\models\QueryForm::find(),
-    'pagination' => [
-        'pageSize' => 20,
-    ],
-]);
-echo GridView::widget([
-    'dataProvider' => $dataProvider,
-]);
+<?php
+
+    echo $gridview;
+
 ?>
 
 
