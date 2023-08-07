@@ -161,9 +161,17 @@ class SiteController extends Controller
                 // TODO:: How to send this as Flash Message and return to previous Form;
 
                 Yii::$app->session->setFlash('danger', $message);
+            }else
+                //show view page after successful database insertion
+            {
+                return $this->render('view',[
+                    'model'=>$model
+                ]);
             }
-        }
 
+
+        }
+        //if there is no post request show user query form
         return $this->render('customer-query',[
             'model'=>$model
         ]);
