@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\QueryForm;
+use Throwable;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -156,21 +157,21 @@ class SiteController extends Controller
             $model->load($data);
             //if error occurs while data insertion
             //user stays on same page and shown flash error message
-            if(!$model->save()){
-                $message = $model->errors;
-                // TODO:: How to send this as Flash Message and return to previous Form;
-
-                Yii::$app->session->setFlash('danger', $message);
-            }else
-                //show view page after successful database insertion
+            try
             {
+                $model->save();
+
+                //show view page after successful database insertion
                 return $this->render('view',[
                     'model'=>$model
                 ]);
+            }catch(\Throwable $modelSaveError)
+            {
+                $message = $model->errors;
+                Yii::$app->session->setFlash('danger', $message);
             }
-
-
         }
+
         //if there is no post request show user query form
         return $this->render('customer-query',[
             'model'=>$model
