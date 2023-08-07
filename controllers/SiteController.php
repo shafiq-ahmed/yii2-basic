@@ -141,22 +141,27 @@ class SiteController extends Controller
     }
     /**
      * Displays Query form
+     * Saves form data after submission
      * @return string
      * */
     public function actionCustomerQuery()
     {
         $model= new QueryForm();
         $data = Yii::$app->request->post();
+
+        //if data is retrieved from post request
+        //load data to model
+        //save data to database
         if ($data){
             $model->load($data);
+            //if error occurs while data insertion
+            //user stays on same page and shown flash error message
             if(!$model->save()){
                 $message = $model->errors;
                 // TODO:: How to send this as Flash Message and return to previous Form;
 
+                Yii::$app->session->setFlash('danger', $message);
             }
-
-            //Continue with forwarding to view/index page.
-
         }
 
         return $this->render('customer-query',[

@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var app\models\ContactForm $model */
+/** @var \app\models\QueryForm $model */
 
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
@@ -37,6 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             If you have business inquiries or other questions, please fill out the following form to contact us.
             Thank you.
         </p>
+    <!--Show error message if formdata insertion fails    -->
+    <?= \app\widgets\Alert::widget()?>
 
         <div class="row">
             <div class="col-lg-5">
