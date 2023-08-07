@@ -18,7 +18,7 @@ $this->title = 'Queries';
     <div class="body-content">
 
 <?php
-
+    //show list of queries in gridview
     echo $gridview;
 
 ?>
