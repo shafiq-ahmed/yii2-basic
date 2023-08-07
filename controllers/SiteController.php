@@ -58,7 +58,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays Query index page.
      *
      * @return string
      */
@@ -139,17 +139,28 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-
-    public function actionQuery()
+    /**
+     * Displays Query form
+     * @return string
+     * */
+    public function actionCustomerQuery()
     {
         $model= new QueryForm();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
+        $data = Yii::$app->request->post();
+        if ($data){
+            $model->load($data);
+            if(!$model->save()){
+                $message = $model->errors;
+                // TODO:: How to send this as Flash Message and return to previous Form;
 
-            return $this->refresh();
+            }
+
+            //Continue with forwarding to view/index page.
+
         }
-        return $this->render('query',[
-            'model'=>$model,
+
+        return $this->render('customer-query',[
+            'model'=>$model
         ]);
     }
 
