@@ -168,11 +168,12 @@ class SiteController extends Controller
                 if ($model->attachment != null) {
 
                     //set a unique name for the file and set the file path
-                    $attachmentFilePath = 'uploads/' . uniqid() . '.' . $model->attachment->extension;
+                    $attachmentFileName= uniqid() . '.' . $model->attachment->extension;
+                    $attachmentFilePath = 'uploads/';
                     //save the file to local storage using the unique name
-                    $model->attachment->saveAs($attachmentFilePath);
+                    $model->attachment->saveAs($attachmentFilePath.$attachmentFileName);
                     //set the local filepath to the model attribute
-                    $model->attachment = $attachmentFilePath;
+                    $model->attachment = $attachmentFileName ;
                 }
                 $model->save();
                 //show view page after successful database insertion
