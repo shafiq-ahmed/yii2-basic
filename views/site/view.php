@@ -25,7 +25,7 @@ echo \yii\widgets\DetailView::widget([
         'query',
         [
             'attribute'=>'attachment',
-            'value'=>Html::a('Download',$attachmentURl),
+            'value'=>($model->attachment)?Html::a('Download',$attachmentURl):"No Attachment Available",
             'format'=>'raw'
         ]
 
