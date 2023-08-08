@@ -168,7 +168,7 @@ class SiteController extends Controller
                 if ($model->attachment != null) {
 
                     //set a unique name for the file and set the file path
-                    $attachmentFileName= uniqid() . '.' . $model->attachment->extension;
+                    $attachmentFileName= uniqid('atc'.date('YmdHisv')) . '.' . $model->attachment->extension;
                     $attachmentFilePath = 'uploads/';
                     //save the file to local storage using the unique name
                     $model->attachment->saveAs($attachmentFilePath.$attachmentFileName);
