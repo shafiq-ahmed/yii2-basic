@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-lg-5">
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
                 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'query')->textarea(['rows' => 6]) ?>
 
-                <?= $form->field($model, 'attachment'); ?>
+                <?= $form->field($model, 'attachment')->fileInput(); ?>
 
 
                 <div class="form-group">

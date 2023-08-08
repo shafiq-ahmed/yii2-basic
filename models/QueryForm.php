@@ -6,7 +6,7 @@ use yii\db\ActiveRecord;
 
 class QueryForm extends ActiveRecord
 {
-    public $attachment="none";
+
  public function rules()
  {
      return [
