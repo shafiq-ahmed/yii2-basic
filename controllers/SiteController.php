@@ -7,6 +7,7 @@ use Throwable;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -193,6 +194,23 @@ class SiteController extends Controller
         return $this->render('customer-query',[
             'model'=>$model
         ]);
+    }
+
+    /** Sends the file to the browser to be downloaded
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function actionAttachment($filename)
+    {
+        //set the local storage path for the file
+        $storagePath = Yii::getAlias('@app/web/uploads');
+
+        // check filename for allowed chars (do not allow ../ to avoid security issue: downloading arbitrary files)
+        if (!preg_match('/^[a-z0-9]+\.[a-z0-9]+$/i', $filename) || !is_file("$storagePath/$filename")) {
+            throw new \yii\web\NotFoundHttpException('The file does not exists.');
+        }
+        return Yii::$app->response->sendFile("$storagePath/$filename", $filename);
     }
 
 

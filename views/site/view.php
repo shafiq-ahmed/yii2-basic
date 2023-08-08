@@ -11,6 +11,9 @@ use yii\captcha\Captcha;
 $this->title = 'Query Details';
 $this->params['breadcrumbs'][] = $this->title;
 
+
+//set url to be used to access the file from local storage
+$attachmentURl="/site/attachment?filename=$model->attachment";
 //show query details
 echo \yii\widgets\DetailView::widget([
     'model'=>$model,
@@ -20,6 +23,11 @@ echo \yii\widgets\DetailView::widget([
         'email',
         'subject',
         'query',
+        [
+            'attribute'=>'attachment',
+            'value'=>Html::a('Download',$attachmentURl),
+            'format'=>'raw'
+        ]
 
     ]
 ]);
