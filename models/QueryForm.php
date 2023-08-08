@@ -23,8 +23,8 @@ class QueryForm extends ActiveRecord
          //ToDo
          //Phone numbers either 11 or 13 digits of length have to be accepted
          ['phone_number','match', 'pattern'=>'/^\d{13}$/'],
-
-         ['attachment','string','length'=>[0,100]]
+         //only files will be accepted in the attachment field
+         ['attachment','file']
      ];
  }
 }
