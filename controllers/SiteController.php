@@ -172,7 +172,7 @@ class SiteController extends Controller
                     $attachmentFilePath = 'uploads/';
                     //save the file to local storage using the unique name
                     $model->attachment->saveAs($attachmentFilePath.$attachmentFileName);
-                    //set the local filepath to the model attribute
+                    //set the attachment filename to model attribute
                     $model->attachment = $attachmentFileName ;
                 }
                 $model->save();
