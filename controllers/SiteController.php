@@ -13,6 +13,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use yii\web\UploadedFile;
 use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
@@ -155,15 +156,24 @@ class SiteController extends Controller
         //if data is retrieved from post request
         //load data to model
         //save data to database
-
-
         if ($data){
             $model->load($data);
 
             //if error occurs while data insertion
             //user stays on same page and shown flash error message
-            try
-            {
+            try {
+                //get instance of the uploaded file
+                $model->attachment = UploadedFile::getInstance($model, 'attachment');
+                //check if a file has been uploaded
+                if ($model->attachment != null) {
+
+                    //set a unique name for the file and set the file path
+                    $attachmentFilePath = 'uploads/' . uniqid() . '.' . $model->attachment->extension;
+                    //save the file to local storage using the unique name
+                    $model->attachment->saveAs($attachmentFilePath);
+                    //set the local filepath to the model attribute
+                    $model->attachment = $attachmentFilePath;
+                }
                 $model->save();
                 //show view page after successful database insertion
                 return $this->render('view',[
@@ -171,7 +181,8 @@ class SiteController extends Controller
                 ]);
             }catch(\Throwable $modelSaveError)
             {
-                $message = $model->errors;
+                //$message = $model->errors;
+                $message = $modelSaveError->getMessage();
                 Yii::$app->session->setFlash('danger', $message);
             }
 
