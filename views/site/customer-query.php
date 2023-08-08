@@ -31,6 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'query')->textarea(['rows' => 6]) ?>
 
+                <?= $form->field($model, 'attachment'); ?>
+
 
                 <div class="form-group">
                     <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>

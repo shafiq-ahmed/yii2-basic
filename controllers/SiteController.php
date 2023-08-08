@@ -13,6 +13,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use yii\grid\GridView;
 use yii\data\ActiveDataProvider;
+use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
 {
@@ -148,19 +149,22 @@ class SiteController extends Controller
     public function actionCustomerQuery()
     {
         $model= new QueryForm();
-        $data = Yii::$app->request->post();
 
+        //$data = Yii::$app->request->post();
+        $data=(Yii::$app->request->post());
         //if data is retrieved from post request
         //load data to model
         //save data to database
+
+
         if ($data){
             $model->load($data);
+
             //if error occurs while data insertion
             //user stays on same page and shown flash error message
             try
             {
                 $model->save();
-
                 //show view page after successful database insertion
                 return $this->render('view',[
                     'model'=>$model
@@ -170,6 +174,7 @@ class SiteController extends Controller
                 $message = $model->errors;
                 Yii::$app->session->setFlash('danger', $message);
             }
+
         }
 
         //if there is no post request show user query form
